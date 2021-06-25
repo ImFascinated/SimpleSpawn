@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 /**
@@ -36,6 +37,15 @@ public class SpawnManager implements Listener {
     public void save() {
         config.set("config.location", SimpleSpawn.getGSON().toJson(spawn));
         SimpleSpawn.getConfiguration().saveConfig();
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        if (!event.getPlayer().hasPlayedBefore()) {
+            if (spawn != null) {
+                event.getPlayer().teleport(spawn);
+            }
+        }
     }
 
     @EventHandler
