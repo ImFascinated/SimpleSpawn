@@ -18,6 +18,8 @@ import java.util.Objects;
 public enum LangOption {
 
     PREFIX("messages.prefix"),
+    BYPASS_COOLDOWN("messages.bypass-cooldown"),
+    DISABLE_LOAD_MESSAGE("config.disable-load-message"),
     SIMPLESPAWN_HELP("messages.simplespawn.help"),
     SIMPLESPAWN_RELOAD("messages.simplespawn.reload"),
     INVALID_SPAWN("messages.invalid-spawn"),

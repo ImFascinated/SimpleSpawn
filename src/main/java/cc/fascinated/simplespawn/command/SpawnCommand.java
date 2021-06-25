@@ -6,6 +6,7 @@ import cc.fascinated.simplespawn.utils.io.LangOption;
 import com.sun.tools.javac.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -59,11 +60,15 @@ public class SpawnCommand implements CommandExecutor {
 
         AtomicInteger countdownTime = new AtomicInteger(this.config.getInt("config.teleport-delay"));
         if (countdownTime.get() > 0) {
-            this.cooldowns.put(player.getUniqueId(), System.currentTimeMillis() + (config.getInt("config.cooldown") * 1000));
-            Bukkit.getScheduler().scheduleSyncDelayedTask(SimpleSpawn.getINSTANCE(),
-                    () -> this.cooldowns.remove(player.getUniqueId()),
-                    config.getInt("config.cooldown") * 20
-            );
+            if (!player.hasPermission("simplespawn.bypass")) {
+                this.cooldowns.put(player.getUniqueId(), System.currentTimeMillis() + (config.getInt("config.cooldown") * 1000));
+                Bukkit.getScheduler().scheduleSyncDelayedTask(SimpleSpawn.getINSTANCE(),
+                        () -> this.cooldowns.remove(player.getUniqueId()),
+                        config.getInt("config.cooldown") * 20
+                );
+            } else {
+                player.sendMessage(LangOption.PREFIX.get() + LangOption.BYPASS_COOLDOWN.get());
+            }
             this.locations.put(player.getUniqueId(), player.getLocation());
             this.timeLeft.put(player.getUniqueId(), Bukkit.getScheduler().scheduleSyncRepeatingTask(SimpleSpawn.getINSTANCE(), () -> {
                 Location oldLoc = this.locations.get(player.getUniqueId());
