@@ -22,36 +22,36 @@ public class SpawnManager implements Listener {
 
         String loc = config.getString("config.location");
         if (loc != null && !loc.equals("{}")) {
-            spawn = SimpleSpawn.getGSON().fromJson(loc, Location.class);
+            this.spawn = SimpleSpawn.getGSON().fromJson(loc, Location.class);
         }
     }
 
     public void setSpawn(Location location) {
-        spawn = location;
+        this.spawn = location;
     }
 
     public Location getSpawn() {
-        return spawn;
+        return this.spawn;
     }
 
     public void save() {
-        config.set("config.location", SimpleSpawn.getGSON().toJson(spawn));
+        this.config.set("config.location", SimpleSpawn.getGSON().toJson(this.spawn));
         SimpleSpawn.getConfiguration().saveConfig();
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         if (!event.getPlayer().hasPlayedBefore()) {
-            if (spawn != null) {
-                event.getPlayer().teleport(spawn);
+            if (this.spawn != null) {
+                event.getPlayer().teleport(this.spawn);
             }
         }
     }
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
-        if (spawn != null) {
-            event.setRespawnLocation(spawn);
+        if (this.spawn != null) {
+            event.setRespawnLocation(this.spawn);
         }
     }
 }

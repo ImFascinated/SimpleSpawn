@@ -4,6 +4,8 @@ main: cc.fascinated.simplespawn.SimpleSpawn
 author: Fascinated#4735
 api-version: 1.17
 commands:
+  simplespawn:
+    description: Main entry point for SimpleSpawn
   setspawn:
     description: Sets the servers main spawn point
   spawn:

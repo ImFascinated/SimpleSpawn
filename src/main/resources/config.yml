@@ -16,3 +16,13 @@ messages:
   already-teleporting: "You already have a teleport command on-going, please move to cancel it."
   set-spawn: "You have set the spawn location to &eX: &f%x% &eY: &f%y% &eZ: &f%z%."
   on-cooldown: "You are currently on teleport cooldown for another &e%timeLeft%&f."
+
+  simplespawn:
+    help:
+      - ""
+      - " &6Simple Spawn"
+      - ""
+      - " &8▪ &e/setspawn &7- &fShows this menu"
+      - " &8▪ &e/setspawn reload &7- &fReloads the configuration file"
+      - ""
+    reload: "Successfully reloaded"

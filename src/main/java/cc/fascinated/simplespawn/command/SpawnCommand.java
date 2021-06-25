@@ -46,32 +46,32 @@ public class SpawnCommand implements CommandExecutor {
             return true;
         }
 
-        if (cooldowns.get(player.getUniqueId()) != null) {
+        if (this.cooldowns.get(player.getUniqueId()) != null) {
             player.sendMessage(LangOption.PREFIX.get() + LangOption.ON_COOLDOWN.get()
                     .replaceAll("%timeLeft%", Utils.formatTime(cooldowns.get(player.getUniqueId()) - System.currentTimeMillis(), true)));
             return true;
         }
 
-        if (timeLeft.get(player.getUniqueId()) != null) {
+        if (this.timeLeft.get(player.getUniqueId()) != null) {
             player.sendMessage(LangOption.PREFIX.get() + LangOption.ALREADY_TELEPORTING.get());
             return true;
         }
 
-        AtomicInteger countdownTime = new AtomicInteger(config.getInt("config.teleport-delay"));
+        AtomicInteger countdownTime = new AtomicInteger(this.config.getInt("config.teleport-delay"));
         if (countdownTime.get() > 0) {
-            cooldowns.put(player.getUniqueId(), System.currentTimeMillis() + (config.getInt("config.cooldown") * 1000));
+            this.cooldowns.put(player.getUniqueId(), System.currentTimeMillis() + (config.getInt("config.cooldown") * 1000));
             Bukkit.getScheduler().scheduleSyncDelayedTask(SimpleSpawn.getINSTANCE(),
-                    () -> cooldowns.remove(player.getUniqueId()),
+                    () -> this.cooldowns.remove(player.getUniqueId()),
                     config.getInt("config.cooldown") * 20
             );
-            locations.put(player.getUniqueId(), player.getLocation());
-            timeLeft.put(player.getUniqueId(), Bukkit.getScheduler().scheduleSyncRepeatingTask(SimpleSpawn.getINSTANCE(), () -> {
-                Location oldLoc = locations.get(player.getUniqueId());
+            this.locations.put(player.getUniqueId(), player.getLocation());
+            this.timeLeft.put(player.getUniqueId(), Bukkit.getScheduler().scheduleSyncRepeatingTask(SimpleSpawn.getINSTANCE(), () -> {
+                Location oldLoc = this.locations.get(player.getUniqueId());
                 Location newLoc = player.getLocation();
                 if (oldLoc.getBlockX() != newLoc.getBlockX() || oldLoc.getBlockY() != newLoc.getBlockY() || oldLoc.getBlockZ() != newLoc.getBlockZ()) {
                     player.sendTitle(LangOption.TITLE_HEADER.get(), LangOption.TITLE_TELEPORT_FAILED.get(), 5, 20, 5);
-                    Bukkit.getScheduler().cancelTask(timeLeft.get(player.getUniqueId()));
-                    timeLeft.remove(player.getUniqueId());
+                    Bukkit.getScheduler().cancelTask(this.timeLeft.get(player.getUniqueId()));
+                    this.timeLeft.remove(player.getUniqueId());
                     return;
                 }
                 player.sendTitle(LangOption.TITLE_HEADER.get(), LangOption.TITLE_TELEPORTING_IN.get()
@@ -80,8 +80,8 @@ public class SpawnCommand implements CommandExecutor {
                 if (countdownTime.intValue() == -1) {
                     player.teleport(spawn);
                     player.sendTitle(LangOption.TITLE_HEADER.get(), LangOption.TITLE_TELEPORTED.get());
-                    Bukkit.getScheduler().cancelTask(timeLeft.get(player.getUniqueId()));
-                    timeLeft.remove(player.getUniqueId());
+                    Bukkit.getScheduler().cancelTask(this.timeLeft.get(player.getUniqueId()));
+                    this.timeLeft.remove(player.getUniqueId());
                 }
             }, 0L, 20L));
         }

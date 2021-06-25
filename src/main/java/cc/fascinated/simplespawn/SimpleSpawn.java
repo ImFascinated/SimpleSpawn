@@ -1,6 +1,7 @@
 package cc.fascinated.simplespawn;
 
 import cc.fascinated.simplespawn.command.SetSpawnCommand;
+import cc.fascinated.simplespawn.command.SimpleSpawnCommand;
 import cc.fascinated.simplespawn.command.SpawnCommand;
 import cc.fascinated.simplespawn.spawn.SpawnManager;
 import cc.fascinated.simplespawn.utils.io.Config;
@@ -30,6 +31,7 @@ public final class SimpleSpawn extends JavaPlugin {
         configuration.saveDefaultConfig();
 
         spawnManager = new SpawnManager();
+        new SimpleSpawnCommand();
         new SpawnCommand();
         new SetSpawnCommand();
     }

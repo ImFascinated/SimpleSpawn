@@ -18,6 +18,8 @@ import java.util.Objects;
 public enum LangOption {
 
     PREFIX("messages.prefix"),
+    SIMPLESPAWN_HELP("messages.simplespawn.help"),
+    SIMPLESPAWN_RELOAD("messages.simplespawn.reload"),
     INVALID_SPAWN("messages.invalid-spawn"),
     ALREADY_TELEPORTING("messages.already-teleporting"),
     ON_COOLDOWN("messages.on-cooldown"),
@@ -68,4 +70,9 @@ public enum LangOption {
         return option.get();
     }
 
+    public static void clear() {
+        resultCache.clear();
+        booleanResultCache.clear();
+        resultListCache.clear();
+    }
 }
