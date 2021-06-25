@@ -1,0 +1,10 @@
+name: SimpleSpawn
+version: ${project.version}
+main: cc.fascinated.simplespawn.SimpleSpawn
+author: Fascinated#4735
+api-version: 1.17
+commands:
+  setspawn:
+    description: Sets the servers main spawn point
+  spawn:
+    description: Teleports you to the servers spawn point

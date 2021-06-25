@@ -1,0 +1,18 @@
+config:
+  cooldown: 300 # How often the command can be used in seconds [30 minutes by default]
+  teleport-delay: 5 # How long it should take to teleport the player in seconds (set to "NONE" for no delay) [5 seconds by default]
+  location: "{}"
+
+titles:
+  header: "&6Spawn"
+  teleporting-in: "&7Teleporting in %time%..."
+  teleporting: "&7Teleporting..."
+  teleport-failed: "&cYou have moved and cancelled the teleport"
+
+messages:
+  prefix: "&6SimpleSpawn &8▪ &r"
+  no-permission: "&cYou do not have permission to use this command."
+  invalid-spawn: "No spawn has been created or set, please contact the administrators."
+  already-teleporting: "You already have a teleport command on-going, please move to cancel it."
+  set-spawn: "You have set the spawn location to &eX: &f%x% &eY: &f%y% &eZ: &f%z%."
+  on-cooldown: "You are currently on teleport cooldown for another &e%timeLeft%&f."
