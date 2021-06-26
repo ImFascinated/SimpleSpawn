@@ -23,13 +23,14 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class SpawnCommand implements CommandExecutor {
 
-    private final FileConfiguration config = SimpleSpawn.getConfiguration().getConfiguration();
+    private FileConfiguration config;
     private final Map<UUID, Integer> timeLeft = new HashMap<>();
     private final Map<UUID, Location> locations = new HashMap<>();
     private final Map<UUID, Long> cooldowns = new HashMap<>();
 
     public SpawnCommand() {
         Objects.requireNonNull(SimpleSpawn.getINSTANCE().getCommand("spawn")).setExecutor(this);
+        config = SimpleSpawn.getConfiguration().getConfiguration();
     }
 
     @Override
@@ -67,7 +68,9 @@ public class SpawnCommand implements CommandExecutor {
                         config.getInt("config.cooldown") * 20
                 );
             } else {
-                player.sendMessage(LangOption.PREFIX.get() + LangOption.BYPASS_COOLDOWN.get());
+                if (!this.config.getBoolean("config.disable-bypass-cooldown-message")) {
+                    player.sendMessage(LangOption.PREFIX.get() + LangOption.BYPASS_COOLDOWN.get());
+                }
             }
             this.locations.put(player.getUniqueId(), player.getLocation());
             this.timeLeft.put(player.getUniqueId(), Bukkit.getScheduler().scheduleSyncRepeatingTask(SimpleSpawn.getINSTANCE(), () -> {

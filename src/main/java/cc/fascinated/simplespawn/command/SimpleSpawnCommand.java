@@ -55,7 +55,7 @@ public class SimpleSpawnCommand implements CommandExecutor {
         return true;
     }
 
-    public class CommandTabCompleter implements TabCompleter {
+    public static class CommandTabCompleter implements TabCompleter {
 
         private final String[] COMMANDS = { "reload" };
 

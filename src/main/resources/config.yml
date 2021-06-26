@@ -28,4 +28,4 @@ messages:
       - " &8▪ &e/setspawn &7- &fShows this menu"
       - " &8▪ &e/setspawn reload &7- &fReloads the configuration file"
       - ""
-    reload: "Successfully reloaded"
+    reload: "Successfully reloaded configuration file"
