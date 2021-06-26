@@ -7,11 +7,13 @@ Features: </br>
 - Configurable</br>
 
 
-Commands:
+Commands:</br>
+/simplespawn - Main command for the plugin
 /spawn - Sets the servers main spawn point</br>
 /setspawn - Teleports you to the servers spawn point</br>
 
 Permissions</br>
+simplespawn - simplespawn.command.simplespawn
 spawn - simplespawn.command.spawn</br>
 setspawn - simplespawn.command.setspawn</br>
 
